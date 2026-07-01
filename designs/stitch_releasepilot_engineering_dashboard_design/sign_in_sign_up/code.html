@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In - ReleasePilot</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter & Geist -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-dim": "#dcd9db",
+                "on-primary-container": "#7c839b",
+                "outline-variant": "#c6c6cd",
+                "background": "#fcf8fa",
+                "tertiary-fixed": "#fcdeb5",
+                "on-surface-variant": "#45464d",
+                "surface-tint": "#565e74",
+                "surface-bright": "#fcf8fa",
+                "surface-variant": "#e4e2e4",
+                "primary-fixed-dim": "#bec6e0",
+                "on-secondary-container": "#57657b",
+                "on-primary-fixed": "#131b2e",
+                "surface-container-lowest": "#ffffff",
+                "on-background": "#1b1b1d",
+                "on-secondary-fixed-variant": "#3a485c",
+                "surface-container-highest": "#e4e2e4",
+                "on-primary": "#ffffff",
+                "primary-container": "#131b2e",
+                "primary-fixed": "#dae2fd",
+                "primary": "#000000",
+                "on-secondary-fixed": "#0d1c2f",
+                "inverse-surface": "#303032",
+                "surface": "#fcf8fa",
+                "on-secondary": "#ffffff",
+                "on-primary-fixed-variant": "#3f465c",
+                "secondary-fixed": "#d5e3fd",
+                "surface-container-low": "#f6f3f5",
+                "tertiary-fixed-dim": "#dec29a",
+                "on-tertiary-fixed": "#271901",
+                "surface-container": "#f0edef",
+                "error-container": "#ffdad6",
+                "secondary-fixed-dim": "#b9c7e0",
+                "on-surface": "#1b1b1d",
+                "tertiary": "#000000",
+                "on-error": "#ffffff",
+                "outline": "#76777d",
+                "secondary-container": "#d5e3fd",
+                "tertiary-container": "#271901",
+                "secondary": "#515f74",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-container-high": "#eae7e9",
+                "on-tertiary-container": "#98805d",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed-variant": "#574425",
+                "inverse-on-surface": "#f3f0f2",
+                "inverse-primary": "#bec6e0"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "md": "16px",
+                "base": "4px",
+                "sm": "8px",
+                "gutter": "16px",
+                "xl": "32px",
+                "container_max_width": "1440px",
+                "sidebar_width": "240px",
+                "lg": "24px",
+                "xs": "4px"
+            },
+            "fontFamily": {
+                "headline-md": ["Inter"],
+                "body-sm": ["Inter"],
+                "label-md": ["Geist"],
+                "display": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-lg": ["Inter"],
+                "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8fafc;
+            color: #1b1b1d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .auth-card {
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .input-focus:focus {
+            outline: none;
+            border-color: #0F172A;
+            box-shadow: none;
+        }
+        .sidebar-gradient {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<div class="min-h-screen flex flex-col md:flex-row">
+<!-- Left Side: Branding & Testimonial -->
+<section class="sidebar-gradient md:w-5/12 lg:w-4/12 flex flex-col justify-between p-xl text-white relative overflow-hidden">
+<!-- Background Decorative Element -->
+<div class="absolute top-0 right-0 -mr-16 -mt-16 opacity-10">
+<span class="material-symbols-outlined text-[320px]">rocket_launch</span>
+</div>
+<!-- Header Branding -->
+<div class="relative z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-headline-lg text-primary-fixed">rocket_launch</span>
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight">ReleasePilot</h1>
+</div>
+<p class="font-label-md text-label-md text-on-primary-container mt-xs">Engineering Ops &amp; Deployment Intelligence</p>
+</div>
+<!-- Testimonial Quote -->
+<div class="relative z-10 mb-xl max-w-sm">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-[48px] text-primary-fixed opacity-50">format_quote</span>
+<p class="font-headline-md text-headline-md leading-relaxed mb-md italic">
+                        "ReleasePilot transformed our mobile deployment cycle. We've reduced release overhead by 40% while maintaining absolute compliance."
+                    </p>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-fixed-dim">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged engineering manager with a confident and calm expression, set against a blurred modern office background. The lighting is soft and corporate, aligning with a high-stakes engineering environment. The aesthetic is clean and minimalist, using a palette of soft slates and deep blues to match the ReleasePilot branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQoxY5ADzyeMr9OZTREjVi5BDEEy3cEBF34IicrkwMgSI4iam2yEgYAsa4Wqa83z2GnRuPgW82pPN9fbQ4gGKh-XxRrc62MPArLh7n8vnQn5JqlsMoWA02ZIV4cRrDIy5OF3PUdwGgvWNgns0dfIkqg9cDyGNej95gQBx2Vk0Zqphach95QH4T8VYXEQn1cYWqFx1KnNMk4xHuqTb22c1gKM1HFv9F1x-TW1JJb-CiIN8_-amvMANwLQmqfDZtYL54PtudSshPhcc"/>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold">Marcus Chen</p>
+<p class="font-label-sm text-label-sm text-on-primary-container">Director of Engineering, CloudScale</p>
+</div>
+</div>
+</div>
+<!-- Footer Trust Markers -->
+<div class="relative z-10 flex gap-lg opacity-60">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-body-sm">verified_user</span>
+<span class="font-label-sm text-label-sm">SOC2 COMPLIANT</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-body-sm">key</span>
+<span class="font-label-sm text-label-sm">SECURE SSO</span>
+</div>
+</div>
+</section>
+<!-- Right Side: Auth Form -->
+<main class="flex-1 flex items-center justify-center p-gutter bg-surface-bright">
+<div class="w-full max-w-[440px] flex flex-col gap-xl">
+<!-- Card Container -->
+<div class="auth-card bg-surface-container-lowest p-xl rounded-lg">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Welcome Back</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Sign in to your engineering dashboard</p>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-md mb-xl">
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors duration-200">
+<img alt="Google Logo" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-i7gcd3yG4goF0SsoAjErOuV5Fc_5zJ3mt9fNVXfhj4T4rXIowxoPz2U58iEsZDLumrr0ihJaBhiBzj-h0Rbp6QzgP8NjIRd8PF1_8vXHFkApJ9ZeaZYTdv5bZ9YZ2FCbTNaA1EvV6YSU_zQDVWc9rnFU4GLDKoaoBLS8GP5LAEOXI9_NJQptz8fZSBzVUNDVZ8UsitqzMd0DXhV_HZjZs0GWnvDNgC4AQ7yMOMW_n_vbMKsNL4ySBh1To7gSvXqUoAsw3FEynq8"/>
+<span class="font-label-md text-label-md">Google</span>
+</button>
+<button class="flex items-center justify-center gap-sm px-md py-sm border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors duration-200">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.412-4.041-1.412-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+<span class="font-label-md text-label-md">GitHub</span>
+</button>
+</div>
+<div class="relative mb-xl">
+<div class="absolute inset-0 flex items-center">
+<span class="w-full border-t border-outline-variant"></span>
+</div>
+<div class="relative flex justify-center text-xs">
+<span class="bg-surface-container-lowest px-md text-on-surface-variant font-label-sm">OR CONTINUE WITH EMAIL</span>
+</div>
+</div>
+<!-- Email Form -->
+<form class="flex flex-col gap-lg" onsubmit="return false;">
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="email">Email Address</label>
+<input class="w-full px-md py-sm border border-outline-variant rounded-lg font-body-md input-focus" id="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+<div class="flex flex-col gap-base">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-secondary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<input class="w-full px-md py-sm border border-outline-variant rounded-lg font-body-md input-focus" id="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary-container text-white py-sm rounded-lg font-label-md font-bold hover:opacity-90 transition-opacity active:scale-[0.98]" type="submit">
+                            Sign In to ReleasePilot
+                        </button>
+</form>
+<div class="mt-xl text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            Don't have an account? 
+                            <a class="text-primary font-bold hover:underline" href="#">Create Account</a>
+</p>
+</div>
+</div>
+<!-- Footer Legal & Trust -->
+<div class="flex flex-col gap-sm text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+                        By signing in, you agree to our 
+                        <a class="underline hover:text-on-surface" href="#">Terms of Service</a> and 
+                        <a class="underline hover:text-on-surface" href="#">Privacy Policy</a>.
+                    </p>
+<div class="flex justify-center gap-md items-center grayscale opacity-50 mt-sm">
+<span class="font-label-sm text-label-sm font-bold border border-outline px-sm py-[2px] rounded">SSO READY</span>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm font-bold border border-outline px-sm py-[2px] rounded">SAML 2.0</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = passwordInput.nextElementSibling;
+            
+            toggleBtn.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                toggleBtn.querySelector('span').textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            });
+
+            // Focus interaction effect
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.parentElement.classList.add('scale-[1.01]');
+                });
+                input.addEventListener('blur', () => {
+                    input.parentElement.parentElement.classList.remove('scale-[1.01]');
+                });
+            });
+        });
+    </script>
+</body></html>

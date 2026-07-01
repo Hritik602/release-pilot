@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReleasePilot | Engineering Ops for Mobile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f0edef",
+                        "surface-bright": "#fcf8fa",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9db",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e4e2e4",
+                        "tertiary-fixed": "#fcdeb5",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-surface-variant": "#45464d",
+                        "secondary": "#515f74",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-error": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "on-secondary-container": "#57657b",
+                        "on-tertiary-fixed": "#271901",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "secondary-fixed": "#d5e3fd",
+                        "primary-fixed-dim": "#bec6e0",
+                        "outline-variant": "#c6c6cd",
+                        "on-primary-container": "#7c839b",
+                        "primary-fixed": "#dae2fd",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface": "#fcf8fa",
+                        "on-tertiary-container": "#98805d",
+                        "tertiary-container": "#271901",
+                        "background": "#fcf8fa",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#303032",
+                        "on-primary-fixed": "#131b2e",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#bec6e0",
+                        "surface-container-high": "#eae7e9",
+                        "surface-variant": "#e4e2e4",
+                        "on-surface": "#1b1b1d",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d5e3fd",
+                        "primary": "#000000",
+                        "surface-tint": "#565e74",
+                        "surface-container-low": "#f6f3f5",
+                        "on-background": "#1b1b1d",
+                        "outline": "#76777d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "sidebar_width": "240px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "container_max_width": "1440px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Geist"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        body { background-color: #fcf8fa; }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .stagger-item { opacity: 0; transform: translateY(20px); }
+        .hero-active .stagger-item { animation: staggerIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        @keyframes staggerIn { to { opacity: 1; transform: translateY(0); } }
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .pulse-soft { animation: pulse-soft 3s infinite ease-in-out; }
+        @keyframes pulse-soft { 0%, 100% { opacity: 1; filter: brightness(1); } 50% { opacity: 0.85; filter: brightness(1.2); } }
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    </style>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
+<header class="bg-surface/80 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-[100]">
+<nav class="flex justify-between items-center h-14 w-full px-gutter max-w-container_max_width mx-auto">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-bold text-on-background tracking-tight">ReleasePilot</span>
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1" href="#">iOS</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Android</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Flutter</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden lg:flex items-center bg-surface-container-low border border-outline-variant px-sm py-1.5 rounded-lg w-64 group focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant scale-75">search</span>
+<input class="bg-transparent border-none text-label-md focus:ring-0 w-full placeholder:text-on-surface-variant" placeholder="Search releases..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors">notifications</button>
+<button class="px-md py-2 bg-primary text-white text-label-md font-medium rounded-lg hover:opacity-90 active:scale-95 transition-all">New Release</button>
+</div>
+</div>
+</nav>
+</header>
+<main class="pt-14">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center pt-xl pb-24 px-gutter overflow-hidden hero-active">
+<canvas id="hero-canvas"></canvas>
+<div class="max-w-container_max_width mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+<div class="flex flex-col gap-lg">
+<div class="stagger-item stagger-1 inline-flex items-center gap-sm px-sm py-1 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 w-fit">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">v2.4 is live</span>
+</div>
+<h1 class="stagger-item stagger-2 font-display text-[48px] md:text-[72px] leading-[1.05] text-white tracking-tight">
+                    Ship mobile releases with <span class="text-primary-fixed">100% confidence.</span>
+</h1>
+<p class="stagger-item stagger-2 font-body-lg text-body-lg text-white/70 max-w-lg">
+                    The release readiness platform that connects your CI/CD, GitHub, Slack, and QA signals into a single source of truth for Engineering Managers.
+                </p>
+<div class="stagger-item stagger-3 flex flex-wrap gap-md mt-sm">
+<button class="px-xl py-lg bg-white text-primary font-bold rounded-lg text-body-md hover:shadow-2xl hover:-translate-y-0.5 active:scale-[0.98] transition-all">
+                        Start Free Trial
+                    </button>
+<button class="px-xl py-lg bg-white/10 border border-white/20 text-white font-bold backdrop-blur-md rounded-lg text-body-md hover:bg-white/20 transition-all">
+                        Book a Demo
+                    </button>
+</div>
+</div>
+<!-- Dashboard Image Asset -->
+<div class="stagger-item stagger-3 relative group">
+<div class="absolute -inset-10 bg-primary-fixed/20 blur-[100px] rounded-full"></div>
+<div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-black/40 backdrop-blur-sm transform hover:scale-[1.02] transition-transform duration-700">
+<img alt="Dashboard Interface" class="w-full h-auto block opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB56mSdXdzaT7BmFb6pwVINav7wjRdvl-0jUFy4vk6beIGoIfREEhQWYHCly-rlEU21pxMucB-z0fNmeIEXqvxTpvI7K8MBnxZmwA_3ek2MrdRlUlp2QhmjbJ_ZCNFJB7p2s8A-v9iW0lBmDHHhCcLcUPH53PxbqwmRUnYgMq6wUEhXtOLa-Tn2XyufWlRHYKNvXkDne06NcUvi-onb7WkyWvTVjHt-r2B8uW_aVgPIB9KWVL9HNFMatpf0abhgJJz4n9svrMYLbrY"/>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full border-4 border-transparent border-t-primary-fixed/50 border-r-primary-fixed/50 animate-spin-slow pointer-events-none opacity-20"></div>
+<!-- Pulser for Readiness Score -->
+<div class="absolute top-[28%] left-1/2 -translate-x-1/2 w-32 h-32 rounded-full pulse-soft bg-primary-fixed/5 pointer-events-none"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="py-16 border-y border-outline-variant bg-white reveal">
+<div class="max-w-container_max_width mx-auto px-gutter text-center">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-[0.2em] mb-12">Trusted by high-performance engineering teams</p>
+<div class="flex flex-wrap justify-center items-center gap-xl md:gap-[80px] opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+<span class="font-headline-md tracking-tighter italic hover:opacity-100 cursor-default">VECTA</span>
+<span class="font-headline-md font-light hover:opacity-100 cursor-default">SKYLINE</span>
+<span class="font-headline-md font-extrabold hover:opacity-100 cursor-default">BOLT</span>
+<span class="font-headline-md hover:opacity-100 cursor-default">ORBITAL</span>
+<span class="font-headline-md font-mono hover:opacity-100 cursor-default">CODEBASE</span>
+</div>
+</div>
+</section>
+<!-- Stats Bar -->
+<section class="py-12 bg-surface-container-low border-b border-outline-variant reveal">
+<div class="max-w-container_max_width mx-auto px-gutter grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center">
+<p class="text-[32px] font-bold text-primary">99.8%</p>
+<p class="text-label-sm text-on-surface-variant uppercase">Release Stability</p>
+</div>
+<div class="text-center">
+<p class="text-[32px] font-bold text-primary">&lt; 18 min</p>
+<p class="text-label-sm text-on-surface-variant uppercase">Avg. Deploy Time</p>
+</div>
+<div class="text-center">
+<p class="text-[32px] font-bold text-primary">480k+</p>
+<p class="text-label-sm text-on-surface-variant uppercase">Commits Analyzed</p>
+</div>
+<div class="text-center">
+<p class="text-[32px] font-bold text-primary">0</p>
+<p class="text-label-sm text-on-surface-variant uppercase">Critical Rollbacks</p>
+</div>
+</div>
+</section>
+<!-- Main Features Grid -->
+<section class="py-32 px-gutter max-w-container_max_width mx-auto">
+<div class="text-center mb-24 max-w-2xl mx-auto flex flex-col gap-md reveal">
+<h2 class="font-display text-[40px] md:text-[48px] text-primary leading-tight">Decide if your mobile app is safe to ship, <span class="text-secondary">backed by verified signals.</span></h2>
+<p class="text-on-surface-variant text-body-lg">Stop juggling Slack threads and spreadsheets. ReleasePilot centralizes all your deployment context into one objective Readiness Score.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg reveal">
+<div class="bg-white border border-outline-variant rounded-xl p-xl flex flex-col gap-md hover:shadow-lg transition-all group">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">verified_user</span>
+</div>
+<h3 class="font-headline-md text-primary">Automated Readiness Scores</h3>
+<p class="text-on-surface-variant text-body-md">Clear go/no-go signals based on regression tests, build health, and custom QA checklists tailored to your release.</p>
+</div>
+<div class="bg-white border border-outline-variant rounded-xl p-xl flex flex-col gap-md hover:shadow-lg transition-all group">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]">checklist_rtl</span>
+</div>
+<h3 class="font-headline-md text-primary">Interactive QA Checklists</h3>
+<p class="text-on-surface-variant text-body-md">Eliminate manual validation hurdles. ReleasePilot suggests tasks based on code changes and feature flags.</p>
+</div>
+<div class="bg-white border border-outline-variant rounded-xl p-xl flex flex-col gap-md hover:shadow-lg transition-all group">
+<div class="w-12 h-12 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[28px]">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-primary">AI Release Assistant</h3>
+<p class="text-on-surface-variant text-body-md">Predictive modeling highlights potential hotspots before they hit production, learning from your team's historical data.</p>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-32 px-gutter bg-surface-container-low border-y border-outline-variant">
+<div class="max-w-container_max_width mx-auto">
+<div class="text-center mb-20 flex flex-col items-center gap-sm reveal">
+<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full uppercase tracking-widest">Pricing</span>
+<h2 class="font-display text-[40px] text-primary">Pricing that grows with your engineering team.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl max-w-5xl mx-auto reveal">
+<!-- Developer Starter -->
+<div class="bg-white border border-outline-variant rounded-xl p-xl flex flex-col hover:border-primary transition-colors">
+<h3 class="font-headline-md text-primary mb-1">Developer Starter</h3>
+<p class="text-on-surface-variant text-body-sm mb-6">For small teams or side projects.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-[40px] font-bold text-primary">$0</span>
+<span class="text-on-surface-variant text-body-sm">/ month</span>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> 3 Active Release Branches</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Basic CI Integrations</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Shared Dashboard</li>
+</ul>
+<button class="w-full py-3 bg-surface-container-highest text-primary font-bold rounded-lg hover:bg-surface-dim transition-all">Claim Free Bundle</button>
+</div>
+<!-- Engineering Pro -->
+<div class="bg-white border-2 border-primary rounded-xl p-xl flex flex-col relative transform md:scale-105 shadow-xl">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Most Popular</div>
+<h3 class="font-headline-md text-primary mb-1">Engineering Pro</h3>
+<p class="text-on-surface-variant text-body-sm mb-6">Full visibility for professional mobile teams.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-[40px] font-bold text-primary">$149</span>
+<span class="text-on-surface-variant text-body-sm">/ month</span>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Unlimited Release Branches</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Full Integration Suite</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> AI Readiness Insights</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Custom QA Workflows</li>
+</ul>
+<button class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:opacity-90 transition-all">Start 14-Day Free Trial</button>
+</div>
+<!-- Enterprise Suite -->
+<div class="bg-white border border-outline-variant rounded-xl p-xl flex flex-col hover:border-primary transition-colors">
+<h3 class="font-headline-md text-primary mb-1">Enterprise Suite</h3>
+<p class="text-on-surface-variant text-body-sm mb-6">Compliance, scale, and dedicated support.</p>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-[40px] font-bold text-primary">Custom</span>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> SOC2 &amp; HIPAA Compliance</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> SSO &amp; Advanced RBAC</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Dedicated Success Manager</li>
+<li class="flex items-start gap-2 text-body-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> 24/7 SLA Support</li>
+</ul>
+<button class="w-full py-3 border border-outline text-primary font-bold rounded-lg hover:bg-surface-container-low transition-all">Contact Sales Engineering</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 px-gutter reveal">
+<div class="max-w-container_max_width mx-auto bg-primary text-white rounded-2xl p-xl md:p-32 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-fixed/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="relative z-10 text-center flex flex-col items-center gap-lg">
+<h2 class="font-display text-[40px] md:text-[56px]">Scale your mobile output.</h2>
+<p class="text-primary-fixed-dim text-body-lg max-w-xl">Join 500+ engineering teams who have eliminated manual release tracking and reclaimed 20% of their sprint cycle.</p>
+<div class="flex flex-col sm:flex-row gap-md mt-lg">
+<button class="px-xl py-lg bg-white text-primary font-bold rounded-lg text-body-md hover:shadow-2xl transition-all">Start Free Trial</button>
+<button class="px-xl py-lg border border-primary-fixed text-primary-fixed font-bold rounded-lg text-body-md hover:bg-white/10 transition-all">Schedule a Demo</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white border-t border-outline-variant py-24 px-gutter">
+<div class="max-w-container_max_width mx-auto grid grid-cols-2 md:grid-cols-5 gap-xl">
+<div class="col-span-2 flex flex-col gap-lg">
+<span class="font-headline-lg font-bold text-primary tracking-tight">ReleasePilot</span>
+<p class="text-on-surface-variant text-body-sm max-w-xs">Precise engineering operations for mobile-first organizations. Built for scale and reliability.</p>
+<div class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<p class="font-label-md text-primary font-bold uppercase tracking-wider">Product</p>
+<ul class="space-y-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Platform Overview</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Integrations</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Enterprise</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-md">
+<p class="font-label-md text-primary font-bold uppercase tracking-wider">Company</p>
+<ul class="space-y-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">About</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-md">
+<p class="font-label-md text-primary font-bold uppercase tracking-wider">Legal</p>
+<ul class="space-y-sm text-body-sm text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container_max_width mx-auto mt-24 pt-md border-t border-surface-container-highest flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="text-label-sm text-on-surface-variant">© 2024 ReleasePilot Engineering Ops Inc. All rights reserved.</p>
+<div class="flex gap-lg items-center">
+<span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-label-sm text-on-surface-variant">All Systems Operational</span>
+</div>
+</div>
+</footer>
+<script>
+    // WebGL Shader for Hero Background
+    const canvas = document.getElementById('hero-canvas');
+    const gl = canvas.getContext('webgl');
+    if (gl) {
+        const vertexSrc = `
+            attribute vec2 position;
+            varying vec2 v_texCoord;
+            void main() {
+                v_texCoord = position * 0.5 + 0.5;
+                v_texCoord.y = 1.0 - v_texCoord.y;
+                gl_Position = vec4(position, 0.0, 1.0);
+            }
+        `;
+        const fragmentSrc = `
+            precision highp float;
+            varying vec2 v_texCoord;
+            uniform float u_time;
+            uniform vec2 u_resolution;
+
+            void main() {
+                vec2 uv = v_texCoord;
+                float n1 = sin(uv.x * 2.0 + u_time * 0.2) * 0.5 + 0.5;
+                float n2 = cos(uv.y * 3.0 - u_time * 0.15) * 0.5 + 0.5;
+                vec3 color1 = vec3(0.059, 0.09, 0.165); 
+                vec3 color2 = vec3(0.094, 0.145, 0.25); 
+                vec3 color3 = vec3(0.015, 0.05, 0.12); 
+                vec3 finalColor = mix(color1, color2, n1 * n2);
+                finalColor = mix(finalColor, color3, (1.0 - n1) * n2);
+                float pulse = sin(u_time * 0.1) * 0.5 + 0.5;
+                float sweep = smoothstep(0.0, 0.02, abs(fract(uv.y - u_time * 0.05) - 0.5));
+                finalColor += vec3(0.1, 0.2, 0.5) * (1.0 - sweep) * 0.05 * pulse;
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        const createShader = (gl, type, source) => {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            return shader;
+        };
+
+        const program = gl.createProgram();
+        gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vertexSrc));
+        gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fragmentSrc));
+        gl.linkProgram(program);
+        gl.useProgram(program);
+
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+
+        const position = gl.getAttribLocation(program, 'position');
+        gl.enableVertexAttribArray(position);
+        gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+        const timeLoc = gl.getUniformLocation(program, 'u_time');
+        const resLoc = gl.getUniformLocation(program, 'u_resolution');
+
+        const render = (time) => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.uniform1f(timeLoc, time * 0.001);
+            gl.uniform2f(resLoc, canvas.width, canvas.height);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+            requestAnimationFrame(render);
+        };
+        requestAnimationFrame(render);
+    }
+
+    // Scroll Observer for Fade-in-up animations
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+</script>
+</body></html>

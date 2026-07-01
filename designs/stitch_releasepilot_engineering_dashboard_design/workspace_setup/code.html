@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workspace Setup Wizard - ReleasePilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        .sidebar-active-border {
+            border-left: 4px solid #000000;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dcd9db",
+                        "on-primary-container": "#7c839b",
+                        "outline-variant": "#c6c6cd",
+                        "background": "#fcf8fa",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-surface-variant": "#45464d",
+                        "surface-tint": "#565e74",
+                        "surface-bright": "#fcf8fa",
+                        "surface-variant": "#e4e2e4",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-secondary-container": "#57657b",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1b1b1d",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "primary-fixed": "#dae2fd",
+                        "primary": "#000000",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "inverse-surface": "#303032",
+                        "surface": "#fcf8fa",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-container-low": "#f6f3f5",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-tertiary-fixed": "#271901",
+                        "surface-container": "#f0edef",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-surface": "#1b1b1d",
+                        "tertiary": "#000000",
+                        "on-error": "#ffffff",
+                        "outline": "#76777d",
+                        "secondary-container": "#d5e3fd",
+                        "tertiary-container": "#271901",
+                        "secondary": "#515f74",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae7e9",
+                        "on-tertiary-container": "#98805d",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "inverse-on-surface": "#f3f0f2",
+                        "inverse-primary": "#bec6e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "container_max_width": "1440px",
+                        "sidebar_width": "240px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Suppressed for focused wizard journey as per shell visibility rules) -->
+<main class="flex-grow flex flex-col items-center justify-center px-gutter py-xl">
+<!-- Brand Identity Context -->
+<div class="mb-xl text-center">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">ReleasePilot</h1>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mt-xs">Engineering Ops Workspace Setup</p>
+</div>
+<!-- Wizard Card -->
+<div class="w-full max-w-[560px] bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+<!-- Progress Stepper -->
+<div class="px-xl pt-xl pb-lg border-b border-outline-variant bg-surface-container-low">
+<div class="flex justify-between items-center relative">
+<!-- Progress Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-outline-variant -translate-y-1/2 z-0"></div>
+<!-- Active Progress Line -->
+<div class="absolute top-1/2 left-0 w-0 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-500" id="progress-line"></div>
+<!-- Step 1 Circle -->
+<div class="relative z-10 flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm transition-colors duration-300" id="step-1-indicator">
+                            1
+                        </div>
+<span class="font-label-sm text-on-surface text-[10px] uppercase">Identity</span>
+</div>
+<!-- Step 2 Circle -->
+<div class="relative z-10 flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-sm transition-colors duration-300" id="step-2-indicator">
+                            2
+                        </div>
+<span class="font-label-sm text-on-surface-variant text-[10px] uppercase">Details</span>
+</div>
+<!-- Step 3 Circle -->
+<div class="relative z-10 flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-sm transition-colors duration-300" id="step-3-indicator">
+                            3
+                        </div>
+<span class="font-label-sm text-on-surface-variant text-[10px] uppercase">Team</span>
+</div>
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-xl py-xl min-h-[380px] flex flex-col">
+<!-- Step 1: Workspace Name & Slug -->
+<section class="step-transition block" id="step-1-content">
+<header class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Establish Your Workspace</h2>
+<p class="text-on-surface-variant font-body-sm text-body-sm mt-xs">Define the identity of your release management hub. This will be visible to all invited engineers.</p>
+</header>
+<div class="space-y-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="workspace-name">Workspace Name</label>
+<input class="w-full h-9 bg-surface border border-outline px-sm rounded text-body-md focus:outline-none focus:border-primary transition-colors" id="workspace-name" placeholder="e.g., Acme Mobile" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="workspace-slug">Workspace Slug</label>
+<div class="flex items-center h-9">
+<span class="bg-surface-container-high border border-r-0 border-outline px-sm h-full flex items-center text-on-surface-variant font-label-sm rounded-l">releasepilot.io/</span>
+<input class="flex-grow h-full bg-surface border border-outline px-sm rounded-r text-body-md focus:outline-none focus:border-primary transition-colors" id="workspace-slug" placeholder="acme-mobile" type="text"/>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-xs">Lowercase letters, numbers, and dashes only.</p>
+</div>
+</div>
+</section>
+<!-- Step 2: Team Size and Primary Platform -->
+<section class="step-transition hidden" id="step-2-content">
+<header class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Configuration & Scope</h2>
+<p class="text-on-surface-variant font-body-sm text-body-sm mt-xs">Help us optimize your dashboard for your team's specific deployment workflow.</p>
+</header>
+<div class="space-y-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-sm">Team Size</label>
+<div class="grid grid-cols-2 gap-sm">
+<label class="flex items-center gap-sm p-sm border border-outline rounded cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary h-4 w-4" name="team-size" type="radio"/>
+<span class="text-body-md">1-10 Members</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline rounded cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary h-4 w-4" name="team-size" type="radio"/>
+<span class="text-body-md">11-50 Members</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline rounded cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary h-4 w-4" name="team-size" type="radio"/>
+<span class="text-body-md">51-200 Members</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline rounded cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary h-4 w-4" name="team-size" type="radio"/>
+<span class="text-body-md">200+ Enterprise</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-sm">Primary Ecosystem</label>
+<div class="flex gap-sm">
+<button class="flex-1 flex flex-col items-center justify-center p-md border-2 border-primary bg-surface-container-low rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-[32px]" data-icon="phone_iphone">phone_iphone</span>
+<span class="font-label-sm mt-xs">iOS</span>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center p-md border border-outline bg-surface rounded-lg transition-all hover:bg-surface-container-low active:scale-95">
+<span class="material-symbols-outlined text-[32px]" data-icon="phone_android">phone_android</span>
+<span class="font-label-sm mt-xs">Android</span>
+</button>
+<button class="flex-1 flex flex-col items-center justify-center p-md border border-outline bg-surface rounded-lg transition-all hover:bg-surface-container-low active:scale-95">
+<span class="material-symbols-outlined text-[32px]" data-icon="flutter">flutter</span>
+<span class="font-label-sm mt-xs">Cross-Platform</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3: Invite Team Members -->
+<section class="step-transition hidden" id="step-3-content">
+<header class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface">Collaborative Onboarding</h2>
+<p class="text-on-surface-variant font-body-sm text-body-sm mt-xs">Invite your engineering leads and QA managers to begin the release cycle.</p>
+</header>
+<div class="space-y-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="emails">Email Addresses</label>
+<textarea class="w-full bg-surface border border-outline p-sm rounded text-body-md focus:outline-none focus:border-primary transition-colors resize-none" id="emails" placeholder="engineer@acme.com, manager@acme.com..." rows="4"></textarea>
+<p class="text-[11px] text-on-surface-variant mt-xs">Separate multiple emails with commas or line breaks.</p>
+</div>
+<div class="bg-surface-container-high rounded p-md border border-outline-variant flex items-start gap-md">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="info">info</span>
+<div class="flex-grow">
+<h4 class="font-label-sm text-on-surface">Security Note</h4>
+<p class="text-[11px] text-on-surface-variant">Invited users will receive a secure magic link to join this workspace. You can manage roles and permissions later in Settings.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Footer -->
+<div class="mt-auto pt-xl flex justify-between items-center">
+<button class="px-lg h-9 border border-outline text-on-surface font-label-md rounded opacity-50 cursor-not-allowed transition-all hover:bg-surface-container-low" disabled="" id="btn-back">
+                        Back
+                    </button>
+<button class="px-lg h-9 bg-primary text-on-primary font-label-md rounded shadow-sm transition-all hover:opacity-90 active:scale-95" id="btn-continue">
+                        Continue
+                    </button>
+</div>
+</div>
+</div>
+<!-- Footer Help -->
+<div class="mt-xl flex gap-xl">
+<a class="flex items-center gap-xs text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="support_agent">support_agent</span>
+                Support
+            </a>
+<a class="flex items-center gap-xs text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
+                Documentation
+            </a>
+</div>
+</main>
+<!-- Success Decoration (Subtle background element) -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-on-primary-container to-primary opacity-20 pointer-events-none"></div>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        const btnBack = document.getElementById('btn-back');
+        const btnContinue = document.getElementById('btn-continue');
+        const progressLine = document.getElementById('progress-line');
+
+        function updateUI() {
+            // Update step content visibility
+            for (let i = 1; i <= totalSteps; i++) {
+                const content = document.getElementById(`step-${i}-content`);
+                const indicator = document.getElementById(`step-${i}-indicator`);
+                
+                if (i === currentStep) {
+                    content.classList.remove('hidden');
+                    indicator.classList.remove('bg-surface-container-highest', 'text-on-surface-variant', 'border-outline-variant');
+                    indicator.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+                } else if (i < currentStep) {
+                    content.classList.add('hidden');
+                    indicator.classList.remove('bg-surface-container-highest', 'border-outline-variant');
+                    indicator.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+                    // Add checkmark icon for completed steps
+                    indicator.innerHTML = `<span class="material-symbols-outlined text-[18px]">check</span>`;
+                } else {
+                    content.classList.add('hidden');
+                    indicator.classList.add('bg-surface-container-highest', 'text-on-surface-variant', 'border-outline-variant');
+                    indicator.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+                    indicator.textContent = i;
+                }
+            }
+
+            // Update Progress Line
+            const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            progressLine.style.width = `${progressPercentage}%`;
+
+            // Update Buttons
+            if (currentStep === 1) {
+                btnBack.disabled = true;
+                btnBack.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                btnBack.disabled = false;
+                btnBack.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            if (currentStep === totalSteps) {
+                btnContinue.textContent = 'Finish Setup';
+                btnContinue.classList.remove('bg-primary');
+                btnContinue.classList.add('bg-on-secondary-fixed');
+            } else {
+                btnContinue.textContent = 'Continue';
+                btnContinue.classList.add('bg-primary');
+                btnContinue.classList.remove('bg-on-secondary-fixed');
+            }
+        }
+
+        btnContinue.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            } else {
+                // Final Action
+                alert('Workspace Configuration Complete! Redirecting to Dashboard...');
+            }
+        });
+
+        btnBack.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        });
+
+        // Initialize UI
+        updateUI();
+
+        // Platform Selection Micro-interaction
+        const platformButtons = document.querySelectorAll('button[class*="flex-1 flex flex-col"]');
+        platformButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                platformButtons.forEach(b => {
+                    b.classList.remove('border-2', 'border-primary', 'bg-surface-container-low');
+                    b.classList.add('border', 'border-outline', 'bg-surface');
+                });
+                btn.classList.add('border-2', 'border-primary', 'bg-surface-container-low');
+                btn.classList.remove('border', 'border-outline', 'bg-surface');
+            });
+        });
+    </script>
+</body></html>

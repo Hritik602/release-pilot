@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QA Checklist - ReleasePilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dcd9db",
+                        "on-primary-container": "#7c839b",
+                        "outline-variant": "#c6c6cd",
+                        "background": "#fcf8fa",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-surface-variant": "#45464d",
+                        "surface-tint": "#565e74",
+                        "surface-bright": "#fcf8fa",
+                        "surface-variant": "#e4e2e4",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-secondary-container": "#57657b",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1b1b1d",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "primary-fixed": "#dae2fd",
+                        "primary": "#000000",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "inverse-surface": "#303032",
+                        "surface": "#fcf8fa",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-container-low": "#f6f3f5",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-tertiary-fixed": "#271901",
+                        "surface-container": "#f0edef",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-surface": "#1b1b1d",
+                        "tertiary": "#000000",
+                        "on-error": "#ffffff",
+                        "outline": "#76777d",
+                        "secondary-container": "#d5e3fd",
+                        "tertiary-container": "#271901",
+                        "secondary": "#515f74",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae7e9",
+                        "on-tertiary-container": "#98805d",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "inverse-on-surface": "#f3f0f2",
+                        "inverse-primary": "#bec6e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "container_max_width": "1440px",
+                        "sidebar_width": "240px",
+                        "lg": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Geist"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            color: #1b1b1d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+        .sidebar-active-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #000000;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+        .high-density-table tr {
+            height: 48px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-full fixed left-0 top-0 z-50 w-sidebar_width bg-primary-container border-r border-outline-variant">
+<div class="px-gutter py-lg flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-on-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary">ReleasePilot</h1>
+<p class="font-label-sm text-label-sm text-on-primary-container">Engineering Ops</p>
+</div>
+</div>
+<button class="mt-md w-full bg-surface-container-highest text-on-surface font-semibold py-sm px-md rounded flex items-center justify-center gap-sm transition-opacity hover:opacity-90">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-md text-label-md">New Release</span>
+</button>
+</div>
+<nav class="flex-1 px-sm mt-sm overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-body-md text-body-md">Releases</span>
+</a>
+</li>
+<li>
+<a class="relative flex items-center gap-md px-md py-sm bg-surface-container-highest text-on-surface font-semibold border-l-4 border-primary transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-body-md text-body-md">Checklist</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-body-md text-body-md">Integrations</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Insights</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md text-body-md">Audit Logs</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Team</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md text-body-md">Billing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-md mt-auto space-y-1">
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 ml-sidebar_width flex flex-col min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center h-12 w-full px-gutter bg-surface border-b border-outline-variant max-w-container_max_width sticky top-0 z-40">
+<div class="flex items-center gap-lg">
+<div class="relative flex items-center bg-surface-container-low px-sm rounded h-8 border border-outline-variant w-64">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-label-md text-label-md w-full placeholder:text-on-surface-variant" placeholder="Search tasks..." type="text"/>
+</div>
+<nav class="hidden md:flex gap-md">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">iOS</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-sm rounded font-label-md text-label-md" href="#">Android</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-sm rounded font-label-md text-label-md" href="#">Flutter</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-1 rounded">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-1 rounded">account_circle</span>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-1.5 rounded transition-transform active:scale-95">Quick Action</button>
+</div>
+</header>
+<main class="p-gutter flex-1 overflow-x-hidden">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">QA Checklist</h2>
+<p class="font-body-md text-on-surface-variant">Release v2.4.0 • Build #1084 • Production Candidate</p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex border border-outline-variant rounded overflow-hidden">
+<button class="bg-surface-container-highest text-on-surface px-md py-1.5 font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">filter_list</span> Filter
+                        </button>
+<select class="bg-surface border-none focus:ring-0 font-label-md text-label-md py-1.5 pl-md pr-lg">
+<option>All Tasks</option>
+<option>Pending Only</option>
+<option>Blocked Tasks</option>
+</select>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-2 rounded flex items-center gap-sm shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 600;">add</span> Add Task
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Summary -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Completion</p>
+<p class="font-display text-display text-on-surface">68%</p>
+</div>
+<div class="w-12 h-12 bg-secondary-fixed rounded-full flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Open Issues</p>
+<p class="font-display text-display text-on-surface">12</p>
+</div>
+<div class="w-12 h-12 bg-error-container rounded-full flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">bug_report</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Required</p>
+<p class="font-display text-display text-on-surface">04</p>
+</div>
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">warning</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded flex items-center justify-between">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Estimated Time</p>
+<p class="font-display text-display text-on-surface">4h 20m</p>
+</div>
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined">timer</span>
+</div>
+</div>
+</div>
+<!-- Main Checklist Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left high-density-table border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="pl-gutter pr-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider w-8">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</th>
+<th class="px-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Task Name</th>
+<th class="px-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Owner</th>
+<th class="px-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Priority</th>
+<th class="px-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-center">Required</th>
+<th class="px-sm py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Due Date</th>
+<th class="px-gutter py-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Task Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150 group">
+<td class="pl-gutter pr-sm">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Manual sanity check - Core Flow</span>
+<span class="bg-surface-container-high text-on-surface-variant px-1.5 rounded font-label-sm text-label-sm">iOS</span>
+</div>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="A professional headshot of a software developer with a clean, focused expression, set against a blurred office background with cool lighting. The style is sharp and modern corporate photography, matching the precise and authoritative brand personality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUK6NTYK5L2Ekazp5dT_tnUdnulivaECox4R4mTcqWE6tx4_-1Zl5yZAiRbBBT9JAMNaW9atkWEPopP6T-3Qisc5HcoVuhdHJw7xQuZhVJhL1Hbx07_HZmtOojc9q3QVNECfhg2UGr5BLTBcmJm18dUfnwqWFXNHgMX2Jp29yr9FjyEruVPaSnKkVRBo1V4iQw2w2dmPyVDNj0P1wY7k9m9zxFt4_7YqYHyMQ2ryzuBQtDtlfuoH-30nRIj1-0U2b5VWnjP2XEvf8"/>
+<span class="font-body-sm text-body-sm text-on-surface">Alex R.</span>
+</div>
+</td>
+<td class="px-sm">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-error-container text-on-error-container">High</span>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-xs text-on-tertiary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md">Done</span>
+</div>
+</td>
+<td class="px-sm text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">flag</span>
+</td>
+<td class="px-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 24, 2023</span>
+</td>
+<td class="px-gutter text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150 group">
+<td class="pl-gutter pr-sm">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Regression Testing - Checkout Module</span>
+<span class="bg-surface-container-high text-on-surface-variant px-1.5 rounded font-label-sm text-label-sm">Android</span>
+</div>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Close up portrait of a female quality assurance engineer in a modern workplace. She looks confident and analytical. The image is bright and clean with high contrast, aligning with the corporate minimalist aesthetic of the design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCh3gJIhXUmzd4PneTKLT7CrAGXosILtPOVmycdyK0u5Rd7Lr3lVpTUWWXas273zRSofumsv-c2Wf-gMQFfvDGio8-VWIsOEX2iOrCxLaWbpGz9DB8AkTZBG7ckM2LsxRFgHxQnxq-2hG5aa4K9ukmY_GmbiTPBaVBgqShmBcQwLPhIF_iWC35qyiFTz59w5hjSOn8iB-MKE5Dv6URTVr0EoRIpi28lm-f_HqTE2I-KrcfTPDZMd_q7EYtTioMTvfDakQFfDRIFCU"/>
+<span class="font-body-sm text-body-sm text-on-surface">Sarah K.</span>
+</div>
+</td>
+<td class="px-sm">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed">Med</span>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-xs text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+<span class="font-label-md text-label-md">Todo</span>
+</div>
+</td>
+<td class="px-sm text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">flag</span>
+</td>
+<td class="px-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">Today</span>
+</td>
+<td class="px-gutter text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150 group">
+<td class="pl-gutter pr-sm">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Accessibility Audit (Talkback/VoiceOver)</span>
+<span class="bg-surface-container-high text-on-surface-variant px-1.5 rounded font-label-sm text-label-sm">Hybrid</span>
+</div>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Portrait of a young male lead engineer in a high-tech environment. Soft daylighting fills the frame, creating a sense of reliability and clarity. The color palette is composed of soft grays and deep blues, perfectly matching the engineering operations theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGkngKAFCe6QaIViyqCEnsA0AO8zFw8-LRl8WTKC8vnMTTV9fizzRaiNBxKy5pscsnbA1IDcMdlXJ4WUAZmWyU2captTrFHiluAzgXhPYMtLa6lEofI0fu08gPRz_QSvF7JYg9B_LVWH0DFpIiQ3WgR5JdTRIJT91ISMkkK_Zf0KvLhdhFAwQpVICqtSMasdwQGp-xHuvuDU2DQ5PpM5L-pakhPDpmsigClqDxU8673db77-J6c7n8ne5poM3tyceQ6M2ag87wewg"/>
+<span class="font-body-sm text-body-sm text-on-surface">Marcus T.</span>
+</div>
+</td>
+<td class="px-sm">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-container text-on-secondary-container">Low</span>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-xs text-error">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">block</span>
+<span class="font-label-md text-label-md">Blocked</span>
+</div>
+</td>
+<td class="px-sm text-center">
+<span class="material-symbols-outlined text-outline-variant">flag</span>
+</td>
+<td class="px-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 26, 2023</span>
+</td>
+<td class="px-gutter text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150 group">
+<td class="pl-gutter pr-sm">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Performance profiling - Memory Leaks</span>
+<span class="bg-surface-container-high text-on-surface-variant px-1.5 rounded font-label-sm text-label-sm">Android</span>
+</div>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="A detailed portrait of a senior engineering manager with a slight smile, suggesting approachability and professional expertise. The setting is a minimalist architectural space with clean lines and natural light. The aesthetic is ordered, calm, and reliable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjV4GvVQYmt8riHkc0Tp5c1gcofzhBA0AiinLlqp4x9O92tHGg1nlTYQFYMmhR9fR_GXMJkgH-l-cFSgkrU4GkI6juoWarz4wmwb3-xYD_eKbhqkOgCMkNmTJDlGVZ5ZVUx5Eq3SBMVdpvUilPMEPwmmF294mC20AlhRs-cH90yt3ufNSFK7gPA5TDMbQXpMmqZinywbureqbILrB-8mHddE_GxAadQRocD2miX5zon7a64LN_TAC6gw7Ny_5a3q6MEEGi9PS_EP0"/>
+<span class="font-body-sm text-body-sm text-on-surface">Lena W.</span>
+</div>
+</td>
+<td class="px-sm">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-error-container text-on-error-container">High</span>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-xs text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+<span class="font-label-md text-label-md">Todo</span>
+</div>
+</td>
+<td class="px-sm text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">flag</span>
+</td>
+<td class="px-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tomorrow</span>
+</td>
+<td class="px-gutter text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors duration-150 group">
+<td class="pl-gutter pr-sm">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<span class="font-body-md text-body-md font-semibold text-on-surface">API Endpoint Compatibility Check</span>
+<span class="bg-surface-container-high text-on-surface-variant px-1.5 rounded font-label-sm text-label-sm">Global</span>
+</div>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-sm">
+<span class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-[10px]">JD</span>
+<span class="font-body-sm text-body-sm text-on-surface">John Doe</span>
+</div>
+</td>
+<td class="px-sm">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed">Med</span>
+</td>
+<td class="px-sm">
+<div class="flex items-center gap-xs text-on-tertiary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md">Done</span>
+</div>
+</td>
+<td class="px-sm text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">flag</span>
+</td>
+<td class="px-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 23, 2023</span>
+</td>
+<td class="px-gutter text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer/Pagination -->
+<div class="bg-surface-container px-gutter py-sm flex justify-between items-center border-t border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 5 of 32 tasks</span>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-label-md text-label-md">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.querySelector('button.material-symbols-outlined')?.classList.add('animate-pulse');
+            });
+            row.addEventListener('mouseleave', () => {
+                row.querySelector('button.material-symbols-outlined')?.classList.remove('animate-pulse');
+            });
+        });
+
+        // Search highlight mock
+        const searchInput = document.querySelector('input[placeholder="Search tasks..."]');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const taskName = row.querySelector('.font-semibold').textContent.toLowerCase();
+                if (taskName.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body></html>

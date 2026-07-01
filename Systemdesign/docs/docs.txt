@@ -1,0 +1,255 @@
+Good. Since you created `E:\ReleasePilot`, we should treat that as the **real product repo**, but one note: my current writable workspace is still `C:\Users\acer\OneDrive\Documents\B2B SAAS Project`. To directly create/edit files inside `E:\ReleasePilot`, I may need permission later. For now, we can plan cleanly.
+
+**First Principle**
+We do **not** start coding immediately.
+
+We start in this order:
+
+1. Freeze MVP scope
+2. Choose architecture
+3. Choose project structure
+4. Decide manual vs automated parts
+5. Prepare UI/UX from Figma
+6. Create development task list
+7. Then initialize project
+
+**1. Frontend + Backend Setup**
+For ReleasePilot MVP, I recommend a **full-stack Next.js architecture** first.
+
+Use:
+
+- **Frontend:** Next.js + TypeScript + Tailwind CSS
+- **Backend:** Next.js server actions / API routes
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+- **Auth:** Clerk
+- **Jobs later:** Redis + BullMQ
+- **Payments later:** Stripe
+- **AI later:** OpenAI API
+
+Why full-stack Next.js first?
+
+Because you are a solo founder. One codebase is faster, cleaner, and easier to ship. We do not need separate frontend/backend repos yet.
+
+Suggested repo structure:
+
+```text
+E:\ReleasePilot
+  docs/
+  src/
+    app/
+      (marketing)/
+      (auth)/
+      (dashboard)/
+      api/
+    components/
+      ui/
+      dashboard/
+      releases/
+      integrations/
+      checklist/
+    modules/
+      workspaces/
+      projects/
+      releases/
+      checklist/
+      integrations/
+      github/
+      slack/
+      scoring/
+      ai/
+      billing/
+      audit/
+    server/
+      db/
+      services/
+      security/
+      jobs/
+    lib/
+      validators/
+      errors/
+      utils/
+  prisma/
+  public/
+```
+
+**2. Programming Architecture Pattern**
+Yes, web SaaS also needs architecture patterns.
+
+In mobile you use:
+
+```text
+MVVM + Repository + Retrofit Service
+```
+
+For our web app, the similar pattern is:
+
+```text
+UI Components
+→ Server Actions / API Routes
+→ Service Layer
+→ Repository / Prisma Queries
+→ Database
+→ External Provider Clients
+```
+
+Example:
+
+```text
+Dashboard UI
+→ getReleaseDashboard()
+→ releaseService.getDashboard()
+→ releaseRepository.findCurrentRelease()
+→ Prisma/PostgreSQL
+```
+
+For integrations:
+
+```text
+GitHub Sync Job
+→ githubService.syncRepository()
+→ githubClient.fetchPullRequests()
+→ releaseRepository.savePullRequests()
+```
+
+Best pattern for us:
+
+```text
+Module-based clean architecture
+```
+
+Each business area gets its own module:
+
+```text
+modules/releases/
+  release.service.ts
+  release.repository.ts
+  release.types.ts
+  release.validators.ts
+```
+
+This is effective because:
+
+- UI stays clean
+- Business logic is reusable
+- Database logic is not scattered everywhere
+- Easier to test
+- Easier to move backend to NestJS later if needed
+
+Without pattern, the project becomes messy fast:
+
+- API routes contain too much logic
+- UI directly talks to database
+- integration logic gets duplicated
+- scoring rules become hard to change
+- security checks get missed
+
+So yes, we should use a pattern, but not over-engineer.
+
+**3. Things That Should Stay Manual First**
+Before automating, we should ask and decide these manually:
+
+- Which product name: `ReleasePilot`, `ShipReady`, or another?
+- Which auth provider: Clerk or Auth0?
+- Which database hosting: Supabase, Neon, or local first?
+- Which first integration: GitHub only, or GitHub + Slack?
+- Which app type first: Flutter, iOS, Android, React Native, or all as labels?
+- Which readiness score rules?
+- Which Figma design should become first screen?
+- Which screens are MVP and which are later?
+- Which pricing should be displayed or hidden?
+- Should landing page come first or dashboard prototype first?
+
+My recommendation: we manually freeze these before coding.
+
+**4. Figma / Stitch / Antigravity**
+Yes, we can use your Figma design.
+
+Best workflow:
+
+1. Export design from Figma as screenshots or share specs.
+2. Identify screens:
+   - Landing page
+   - Login
+   - Workspace setup
+   - Project setup
+   - Dashboard
+   - Release details
+   - Checklist
+   - Integrations
+   - Billing
+3. Convert UI into React components manually or with AI assistance.
+4. Keep design tokens:
+   - colors
+   - spacing
+   - fonts
+   - buttons
+   - cards
+   - tables
+   - sidebar
+5. Build one screen first, not all screens.
+
+About Antigravity: if it can access your Figma/Stitch design or project files, we can use it as a coding environment, but I need to know exactly how you are using it. Usually the safest method is: export Figma frames/assets and implement in Next.js.
+
+**5. Priority Before Coding**
+We should prioritize like this:
+
+Phase 1: Planning Freeze
+
+- Confirm product name
+- Confirm MVP screens
+- Confirm stack
+- Confirm architecture
+- Confirm manual vs automated scope
+
+Phase 2: Project Setup
+
+- Initialize Next.js
+- Add TypeScript/Tailwind
+- Add folder architecture
+- Add formatting/linting
+- Add basic layout
+- Add placeholder dashboard
+
+Phase 3: UI From Figma
+
+- Build design system
+- Build app shell/sidebar
+- Build dashboard screen
+- Build release detail screen
+- Build checklist screen
+- Build integrations screen
+
+Phase 4: Real Backend
+
+- Auth
+- Workspace
+- Project
+- Release
+- Checklist
+- Readiness score
+
+Phase 5: Integrations
+
+- GitHub
+- Slack
+- AI summary
+- Stripe later
+
+**Questions I Need From You Before Setup**
+Answer these first:
+
+1. Do you want the public product name to be **ReleasePilot**?
+2. Do you want **Next.js full-stack** as frontend + backend for MVP?
+3. Do you prefer **Clerk** for authentication?
+4. Do you want to build **landing page first** or **dashboard prototype first**?
+5. Can you share/export the Figma/Stitch design files or screenshots?
+6. Should I work inside `E:\ReleasePilot`, or should we keep planning docs in the current workspace first?
+
+My recommendation:
+
+- Product name: **ReleasePilot**
+- Stack: **Next.js + TypeScript + Tailwind + PostgreSQL + Prisma + Clerk**
+- First build: **dashboard prototype from your Figma**
+- First backend: only after UI structure is clear
+- First integration: **GitHub**, Slack after that

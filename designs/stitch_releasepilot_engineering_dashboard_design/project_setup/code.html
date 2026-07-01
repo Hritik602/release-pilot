@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Setup | ReleasePilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dcd9db",
+                    "on-primary-container": "#7c839b",
+                    "outline-variant": "#c6c6cd",
+                    "background": "#fcf8fa",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-surface-variant": "#45464d",
+                    "surface-tint": "#565e74",
+                    "surface-bright": "#fcf8fa",
+                    "surface-variant": "#e4e2e4",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-secondary-container": "#57657b",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#1b1b1d",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "primary-fixed": "#dae2fd",
+                    "primary": "#000000",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "inverse-surface": "#303032",
+                    "surface": "#fcf8fa",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#d5e3fd",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-tertiary-fixed": "#271901",
+                    "surface-container": "#f0edef",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "on-surface": "#1b1b1d",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "secondary-container": "#d5e3fd",
+                    "tertiary-container": "#271901",
+                    "secondary": "#515f74",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#eae7e9",
+                    "on-tertiary-container": "#98805d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-on-surface": "#f3f0f2",
+                    "inverse-primary": "#bec6e0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "base": "4px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "container_max_width": "1440px",
+                    "sidebar_width": "240px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Geist"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC; /* Level 0 Background per style guidance */
+            color: #1b1b1d;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .wizard-card {
+            border: 1px solid #E2E8F0; /* Level 1 Surface border */
+            background-color: #FFFFFF;
+            border-radius: 4px;
+        }
+        .input-standard {
+            height: 36px;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 0 12px;
+            font-size: 14px;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+        .input-standard:focus {
+            outline: none;
+            border-color: #0F172A; /* Navy focus per guidance */
+        }
+        .btn-primary {
+            background-color: #0F172A;
+            color: white;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        .btn-secondary {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            color: #45464d;
+            height: 36px;
+            padding: 0 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .stepper-line {
+            height: 2px;
+            background-color: #E2E8F0;
+            flex-grow: 1;
+        }
+        .stepper-line.active {
+            background-color: #0F172A;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopNavBar Suppression Check: Wizard is Transactional/Task-Focused. Suppressing global Nav for focus. -->
+<main class="flex-grow flex items-center justify-center px-gutter py-xl relative">
+<!-- Subtle Background Pattern for Engineering Aesthetic -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#0F172A 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="w-full max-w-[560px] z-10">
+<!-- Header Section -->
+<div class="text-center mb-xl">
+<div class="inline-flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary text-[32px]">rocket_launch</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">ReleasePilot</h1>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Setup your mobile project</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-base">Configure your repository and tech stack to begin automating releases.</p>
+</div>
+<!-- Progress Indicator -->
+<div class="flex items-center mb-xl px-lg">
+<div class="flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-label-md text-label-md">1</div>
+<span class="font-label-sm text-label-sm text-on-surface">Project</span>
+</div>
+<div class="stepper-line mx-sm mb-lg"></div>
+<div class="flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full border border-outline text-outline flex items-center justify-center font-label-md text-label-md">2</div>
+<span class="font-label-sm text-label-sm text-outline">Integration</span>
+</div>
+<div class="stepper-line mx-sm mb-lg"></div>
+<div class="flex flex-col items-center gap-xs">
+<div class="w-8 h-8 rounded-full border border-outline text-outline flex items-center justify-center font-label-md text-label-md">3</div>
+<span class="font-label-sm text-label-sm text-outline">Verification</span>
+</div>
+</div>
+<!-- Main Wizard Card -->
+<div class="wizard-card p-lg shadow-sm">
+<form class="space-y-lg" id="project-setup-form">
+<!-- Project Name -->
+<div class="space-y-base">
+<label class="font-label-md text-label-md text-on-surface flex justify-between">
+                            Project Name
+                            <span class="text-outline-variant font-normal">Required</span>
+</label>
+<input class="input-standard" placeholder="e.g., Main iOS App" type="text" value="Main iOS App"/>
+</div>
+<!-- Repository Selection -->
+<div class="space-y-base">
+<label class="font-label-md text-label-md text-on-surface">Select Repository</label>
+<div class="relative">
+<select class="input-standard appearance-none pr-xl">
+<option>Select a GitHub repository...</option>
+<option selected="">org-name/main-ios-app</option>
+<option>org-name/admin-dashboard-flutter</option>
+<option>org-name/customer-android-native</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+<div class="flex items-center gap-xs mt-base">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container">link</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container">Connected via GitHub App</span>
+</div>
+</div>
+<!-- Branch & Stack Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-base">
+<label class="font-label-md text-label-md text-on-surface">Default Branch</label>
+<div class="relative">
+<select class="input-standard appearance-none pr-xl">
+<option selected="">main</option>
+<option>develop</option>
+<option>release/v1</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-md text-label-md text-on-surface">Primary Tech Stack</label>
+<div class="relative">
+<select class="input-standard appearance-none pr-xl">
+<option>Select stack...</option>
+<option selected="">iOS / Swift</option>
+<option>Android / Kotlin</option>
+<option>Flutter</option>
+<option>React Native</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Visual Configuration Preview (Asymmetric detail) -->
+<div class="bg-surface-container-low p-md rounded border border-outline-variant/30 flex items-start gap-md">
+<div class="w-12 h-12 bg-white border border-outline-variant flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">phone_iphone</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-md text-label-md text-on-surface">Auto-detected settings</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">We've identified this as a SwiftUI project. ReleasePilot will automatically suggest workflows for TestFlight and App Store Connect.</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-md flex items-center justify-between border-t border-outline-variant">
+<button class="btn-secondary flex items-center gap-xs" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Back
+                        </button>
+<button class="btn-primary flex items-center gap-xs group" type="submit">
+                            Continue to Integration
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Footer Help -->
+<div class="mt-lg flex justify-center items-center gap-xl">
+<a class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">help_outline</span>
+                    Setup Documentation
+                </a>
+<a class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+                    Contact Support
+                </a>
+</div>
+</div>
+</main>
+<!-- Side Decoration - Engineering Grid Visualization -->
+<div class="fixed right-0 top-0 h-full w-[400px] pointer-events-none hidden lg:block overflow-hidden">
+<div class="absolute inset-0 flex flex-col justify-center gap-lg translate-x-1/2 opacity-20">
+<div class="w-[600px] h-[300px] border border-outline-variant rounded p-lg flex flex-col gap-sm">
+<div class="h-4 w-1/3 bg-outline-variant rounded"></div>
+<div class="h-4 w-1/2 bg-outline-variant/50 rounded"></div>
+<div class="mt-auto h-24 border border-dashed border-outline-variant rounded flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-outline-variant">CI/CD PIPELINE SCHEMA</span>
+</div>
+</div>
+<div class="w-[600px] h-[300px] border border-outline-variant rounded p-lg flex flex-col gap-sm">
+<div class="h-4 w-1/4 bg-outline-variant rounded"></div>
+<div class="h-24 w-full bg-surface-container rounded-sm border border-outline-variant/20"></div>
+<div class="flex gap-sm mt-md">
+<div class="h-8 w-8 rounded-full bg-outline-variant"></div>
+<div class="h-8 w-8 rounded-full bg-outline-variant/60"></div>
+<div class="h-8 w-8 rounded-full bg-outline-variant/40"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interactions for form focus
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('focus', () => {
+                el.parentElement.classList.add('ring-1', 'ring-primary/10');
+            });
+            el.addEventListener('blur', () => {
+                el.parentElement.classList.remove('ring-1', 'ring-primary/10');
+            });
+        });
+
+        // Simple form submission animation
+        document.getElementById('project-setup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Creating...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                // In a real app, this would route to step 2
+                alert('Project "Main iOS App" initialized. Navigating to integration step...');
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }, 1200);
+        });
+    </script>
+</body></html>

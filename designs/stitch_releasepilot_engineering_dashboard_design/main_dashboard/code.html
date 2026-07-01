@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReleasePilot - Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Geist -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.cdnfonts.com/css/geist" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dcd9db",
+                    "on-primary-container": "#7c839b",
+                    "outline-variant": "#c6c6cd",
+                    "background": "#fcf8fa",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-surface-variant": "#45464d",
+                    "surface-tint": "#565e74",
+                    "surface-bright": "#fcf8fa",
+                    "surface-variant": "#e4e2e4",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-secondary-container": "#57657b",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#1b1b1d",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "primary-fixed": "#dae2fd",
+                    "primary": "#000000",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "inverse-surface": "#303032",
+                    "surface": "#fcf8fa",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#d5e3fd",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-tertiary-fixed": "#271901",
+                    "surface-container": "#f0edef",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "on-surface": "#1b1b1d",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "secondary-container": "#d5e3fd",
+                    "tertiary-container": "#271901",
+                    "secondary": "#515f74",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#eae7e9",
+                    "on-tertiary-container": "#98805d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-on-surface": "#f3f0f2",
+                    "inverse-primary": "#bec6e0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "base": "4px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "container_max_width": "1440px",
+                    "sidebar_width": "240px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Geist"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            color: #1b1b1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Refined Borders and Surfaces */
+        .card-surface {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+        }
+        .sidebar-active-indicator {
+            position: absolute;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-full fixed left-0 top-0 z-50 w-[240px] bg-primary-container text-on-primary-container border-r border-outline-variant">
+<!-- Brand Header -->
+<div class="px-gutter py-lg flex items-center gap-sm">
+<div class="w-8 h-8 bg-on-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary leading-tight">ReleasePilot</h1>
+<p class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-widest">Engineering Ops</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 px-sm mt-md space-y-1">
+<!-- Active Item: Dashboard -->
+<a class="relative flex items-center gap-sm px-md py-sm bg-surface-container-highest text-on-surface font-semibold border-l-4 border-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-body-md text-body-md">Releases</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-body-md text-body-md">Checklist</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-body-md text-body-md">Integrations</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Insights</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md text-body-md">Audit Logs</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Team</span>
+</a>
+</nav>
+<!-- Footer Actions -->
+<div class="p-gutter border-t border-on-primary-fixed-variant">
+<button class="w-full bg-on-primary text-primary-container font-semibold py-sm rounded-lg mb-md flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Release
+            </button>
+<nav class="space-y-1">
+<a class="flex items-center gap-sm px-md py-xs text-on-primary-container hover:text-on-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-sm px-md py-xs text-on-primary-container hover:text-on-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Canvas Area -->
+<main class="ml-[240px] min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center h-12 w-full px-gutter bg-surface border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-lg">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline text-[18px]">search</span>
+</span>
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-md py-1.5 text-body-sm w-80 focus:ring-1 focus:ring-primary" placeholder="Search components, PRs, or logs..." type="text"/>
+</div>
+<div class="hidden md:flex items-center gap-md">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">iOS</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Android</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Flutter</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-1.5 rounded-full transition-colors">notifications</button>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-1 rounded transition-colors">
+<img class="w-7 h-7 rounded-full object-cover" data-alt="A professional headshot of a software engineering manager in a modern office, soft bokeh background, high-end photography, warm studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe1FVHfBN8PpyBESvYYeyhrk3_gja1DdjjN8rudPNY0-6TKVuOzfiiCYV4pVz_KElh-AiIfhHeRfcoD534bMb-X4irUE9kdO6VV5RTuFiDmzdaAM0gu9BvbwLc2ZwWfGzOqOrShYVGq08wcZZkXHlJGg3FQIH_iE2vFxZ40eKjmTdOWFvtyoksJ3bONUe3GDo3Ra-t6Nkfgg_WxSv_u7iLqMHbVK2ylB5WM_33KX2cOJ6CpsQvzrZEc1XArqSQ_ikuiKVhbhZ-uZ0"/>
+<span class="font-label-md text-label-md text-on-surface">Alex Chen</span>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="max-w-[1440px] mx-auto p-gutter space-y-gutter">
+<!-- Header Section: Readiness & Recommendation -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Large Metric Card -->
+<div class="card-surface p-xl flex flex-col items-center justify-center text-center relative overflow-hidden col-span-1 lg:col-span-1">
+<div class="absolute top-0 right-0 p-md">
+<span class="material-symbols-outlined text-outline-variant text-[48px] opacity-20">verified</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-sm">Current Readiness Score</p>
+<div class="flex items-baseline gap-xs">
+<span class="font-display text-[64px] leading-none text-primary">85</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant">/ 100</span>
+</div>
+<div class="mt-md px-lg py-sm bg-green-50 text-green-700 border border-green-200 rounded-full flex items-center gap-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md font-bold">Safe to Ship</span>
+</div>
+</div>
+<!-- Release Context & Summary -->
+<div class="card-surface p-lg col-span-1 lg:col-span-2 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Current Release Cycle</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Active deployments for current sprint</p>
+</div>
+<div class="flex gap-sm">
+<span class="bg-surface-container-high px-sm py-xs rounded text-label-sm font-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">phone_iphone</span> v2.4.0
+                                </span>
+<span class="bg-surface-container-high px-sm py-xs rounded text-label-sm font-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">android</span> v2.4.0
+                                </span>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-sm mb-sm text-on-primary-container">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">AI Release Summary</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic">
+                                "The current build demonstrates high stability with 99.8% crash-free sessions in beta. All critical P0 checklist items are cleared. Recommend shipping iOS ahead of schedule. Android requires one final verification of the push notification module, currently at 92% confidence."
+                            </p>
+</div>
+</div>
+<div class="mt-md flex gap-md">
+<button class="bg-primary text-on-primary font-bold px-xl py-md rounded text-body-md flex items-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">shop</span>
+                            Ship Release
+                        </button>
+<button class="border border-outline text-on-surface font-bold px-xl py-md rounded text-body-md hover:bg-surface-container-low transition-colors">
+                            View Full Report
+                        </button>
+</div>
+</div>
+</div>
+<!-- Bento Grid of Status Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter">
+<!-- CI/CD Status -->
+<div class="card-surface p-md flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-surface-variant">sync</span>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded border border-green-200">PASSING</span>
+</div>
+<div class="mt-xl">
+<p class="font-label-sm text-label-sm text-on-surface-variant">CI/CD Pipeline</p>
+<p class="font-headline-md text-headline-md">14/14 Jobs</p>
+</div>
+</div>
+<!-- QA Checklist -->
+<div class="card-surface p-md flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-surface-variant">fact_check</span>
+<span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">IN PROGRESS</span>
+</div>
+<div class="mt-xl">
+<p class="font-label-sm text-label-sm text-on-surface-variant">QA Checklist</p>
+<p class="font-headline-md text-headline-md">7/10 Done</p>
+</div>
+</div>
+<!-- Blockers -->
+<div class="card-surface p-md flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-surface-variant">error</span>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded border border-green-200">CLEAR</span>
+</div>
+<div class="mt-xl">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Active Blockers</p>
+<p class="font-headline-md text-headline-md">0 Issues</p>
+</div>
+</div>
+<!-- Open PRs -->
+<div class="card-surface p-md flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-surface-variant">fork_right</span>
+<span class="text-[10px] font-bold text-primary-container bg-primary-fixed px-1.5 py-0.5 rounded border border-outline-variant">REVIEW</span>
+</div>
+<div class="mt-xl">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Open Pull Requests</p>
+<p class="font-headline-md text-headline-md">3 Active</p>
+</div>
+</div>
+<!-- Crash Risk -->
+<div class="card-surface p-md flex flex-col justify-between hover:border-primary transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-on-surface-variant">bolt</span>
+<span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 py-0.5 rounded border border-green-200">OPTIMAL</span>
+</div>
+<div class="mt-xl">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Crash Risk</p>
+<p class="font-headline-md text-headline-md">Low</p>
+</div>
+</div>
+</div>
+<!-- Main Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Deployment Readiness Chart Area (Visual Placeholder) -->
+<div class="card-surface col-span-1 lg:col-span-2 overflow-hidden flex flex-col">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">Stability Trend</h3>
+<div class="flex gap-sm">
+<button class="text-label-sm px-sm py-1 bg-surface-container-high rounded font-bold">24h</button>
+<button class="text-label-sm px-sm py-1 text-on-surface-variant font-medium">7d</button>
+<button class="text-label-sm px-sm py-1 text-on-surface-variant font-medium">30d</button>
+</div>
+</div>
+<div class="flex-1 min-h-[300px] relative bg-slate-50 flex items-center justify-center p-xl">
+<!-- Decorative Graph Placeholder -->
+<div class="w-full h-full flex items-end justify-between gap-base">
+<div class="bg-primary/10 w-full h-[60%] rounded-t-sm hover:bg-primary/20 transition-colors"></div>
+<div class="bg-primary/10 w-full h-[65%] rounded-t-sm hover:bg-primary/20 transition-colors"></div>
+<div class="bg-primary/10 w-full h-[55%] rounded-t-sm hover:bg-primary/20 transition-colors"></div>
+<div class="bg-primary/10 w-full h-[70%] rounded-t-sm hover:bg-primary/20 transition-colors"></div>
+<div class="bg-primary/10 w-full h-[85%] rounded-t-sm hover:bg-primary/20 transition-colors"></div>
+<div class="bg-primary w-full h-[90%] rounded-t-sm"></div>
+<div class="bg-primary/10 w-full h-[80%] rounded-t-sm hover:bg-primary/20 transition-colors"></div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-[0.2em]">Build Stability Metrics</p>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="card-surface col-span-1 flex flex-col">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">Recent Activity</h3>
+<button class="material-symbols-outlined text-outline">more_vert</button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<div class="divide-y divide-outline-variant">
+<!-- Activity Item -->
+<div class="p-md hover:bg-surface-container-low transition-colors">
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">done_all</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface">
+<span class="font-bold">Sarah Miller</span> completed <span class="font-bold">QA Checklist</span>
+</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">2 mins ago • v2.4.0 Beta</p>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="p-md hover:bg-surface-container-low transition-colors">
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">commit</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface">
+<span class="font-bold">Build Bot</span> merged <span class="font-bold">PR #1242</span>
+</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">1 hour ago • Core</p>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="p-md hover:bg-surface-container-low transition-colors">
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">bug_report</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface">
+<span class="font-bold">Marcus Roe</span> resolved <span class="font-bold">1 critical blocker</span>
+</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">3 hours ago • Android</p>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="p-md hover:bg-surface-container-low transition-colors">
+<div class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">rocket</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface">
+<span class="font-bold">David K.</span> initiated <span class="font-bold">V2.4.0 Staging Deploy</span>
+</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">5 hours ago • Infrastructure</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-md border-t border-outline-variant">
+<button class="w-full text-center text-label-md text-primary font-bold hover:underline">View All Activity</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only on main screens) -->
+<button class="fixed bottom-lg right-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center group hover:scale-110 transition-transform z-50">
+<span class="material-symbols-outlined text-[28px]">add</span>
+<span class="absolute right-full mr-md bg-primary-container text-on-primary px-md py-sm rounded-lg text-label-md font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            New Release Cycle
+        </span>
+</button>
+<script>
+        // Micro-interactions for dashboard cards
+        document.querySelectorAll('.card-surface').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('shadow-sm');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('shadow-sm');
+            });
+        });
+
+        // Simple active state toggle (for demo)
+        const navLinks = document.querySelectorAll('aside nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => {
+                    l.classList.remove('bg-surface-container-highest', 'text-on-surface', 'font-semibold', 'border-l-4', 'border-primary');
+                    l.classList.add('text-on-primary-container', 'hover:text-on-primary', 'hover:bg-on-primary-fixed-variant');
+                });
+                link.classList.add('bg-surface-container-highest', 'text-on-surface', 'font-semibold', 'border-l-4', 'border-primary');
+                link.classList.remove('text-on-primary-container', 'hover:text-on-primary', 'hover:bg-on-primary-fixed-variant');
+            });
+        });
+    </script>
+</body></html>

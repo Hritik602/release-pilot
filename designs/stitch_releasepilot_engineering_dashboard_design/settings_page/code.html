@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReleasePilot - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dcd9db",
+                    "on-primary-container": "#7c839b",
+                    "outline-variant": "#c6c6cd",
+                    "background": "#fcf8fa",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-surface-variant": "#45464d",
+                    "surface-tint": "#565e74",
+                    "surface-bright": "#fcf8fa",
+                    "surface-variant": "#e4e2e4",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-secondary-container": "#57657b",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#1b1b1d",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#131b2e",
+                    "primary-fixed": "#dae2fd",
+                    "primary": "#000000",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "inverse-surface": "#303032",
+                    "surface": "#fcf8fa",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#d5e3fd",
+                    "surface-container-low": "#f6f3f5",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-tertiary-fixed": "#271901",
+                    "surface-container": "#f0edef",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "on-surface": "#1b1b1d",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "secondary-container": "#d5e3fd",
+                    "tertiary-container": "#271901",
+                    "secondary": "#515f74",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#eae7e9",
+                    "on-tertiary-container": "#98805d",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "inverse-on-surface": "#f3f0f2",
+                    "inverse-primary": "#bec6e0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "base": "4px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "container_max_width": "1440px",
+                    "sidebar_width": "240px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Geist"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #fcf8fa; color: #1b1b1d; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; }
+        
+        /* Custom Toggle Switch */
+        .toggle-switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #e2e8f0; transition: .3s; border-radius: 20px; }
+        .toggle-slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+        input:checked + .toggle-slider { background-color: #0f172a; }
+        input:checked + .toggle-slider:before { transform: translateX(16px); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased">
+<!-- Sidebar Navigation -->
+<aside class="flex flex-col h-full fixed left-0 top-0 z-50 w-sidebar_width bg-primary-container dark:bg-primary-container border-r border-outline-variant dark:border-outline-variant">
+<div class="p-lg">
+<div class="flex items-center gap-sm mb-xl">
+<div class="w-8 h-8 rounded-lg bg-on-primary flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary">ReleasePilot</h1>
+<p class="font-label-sm text-label-sm uppercase tracking-wider text-on-primary-container">Engineering Ops</p>
+</div>
+</div>
+<button class="w-full bg-on-primary text-primary-container font-semibold py-sm px-md rounded-lg mb-xl flex items-center justify-center gap-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Release
+            </button>
+<nav class="space-y-1">
+<!-- Nav items generated from JSON -->
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+<span class="font-body-md text-body-md">Releases</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>
+<span class="font-body-md text-body-md">Checklist</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+<span class="font-body-md text-body-md">Integrations</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="font-body-md text-body-md">AI Insights</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="font-body-md text-body-md">Audit Logs</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="font-body-md text-body-md">Team</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded transition-colors duration-200 ease-in-out text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="font-body-md text-body-md">Billing</span>
+</a>
+<!-- Settings is Active -->
+<a class="flex items-center gap-sm px-md py-sm rounded bg-surface-container-highest text-on-surface font-semibold border-l-4 border-primary transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-lg space-y-1">
+<a class="flex items-center gap-sm px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded text-on-primary-container hover:text-on-primary hover:bg-on-primary-fixed-variant transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center h-12 w-[calc(100%-240px)] px-gutter fixed left-[240px] top-0 z-40 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant">
+<div class="flex items-center gap-lg">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</span>
+<input class="pl-10 pr-4 py-1 h-8 text-label-md font-label-md rounded border border-outline-variant focus:outline-none focus:border-primary-container bg-surface-container-low w-64 transition-all" placeholder="Search settings..." type="text"/>
+</div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">iOS</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Android</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Flutter</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm">
+<button class="p-1.5 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="h-4 w-px bg-outline-variant"></div>
+<button class="flex items-center gap-2 hover:bg-surface-container-low p-1 rounded transition-colors">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-[10px] text-on-primary font-bold">
+                        JD
+                    </div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">expand_more</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+                Quick Action
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-sidebar_width pt-12 min-h-screen">
+<div class="max-w-container_max_width mx-auto px-lg py-xl">
+<!-- Page Header -->
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Workspace Settings</h2>
+<p class="text-on-surface-variant mt-1">Manage your team's workspace, security protocols, and global notification defaults.</p>
+</div>
+<!-- Settings Grid -->
+<div class="grid grid-cols-12 gap-xl">
+<!-- Navigation Tabs (Internal) -->
+<div class="col-span-3 space-y-1">
+<a class="flex items-center justify-between group px-md py-sm bg-surface-container-highest rounded border-l-2 border-primary" href="#general">
+<span class="font-label-md text-label-md text-on-surface font-semibold">General</span>
+<span class="material-symbols-outlined text-[16px] text-primary">chevron_right</span>
+</a>
+<a class="flex items-center justify-between group px-md py-sm hover:bg-surface-container-low rounded transition-colors" href="#security">
+<span class="font-label-md text-label-md text-on-surface-variant">Security &amp; SSO</span>
+<span class="material-symbols-outlined text-[16px] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<a class="flex items-center justify-between group px-md py-sm hover:bg-surface-container-low rounded transition-colors" href="#notifications">
+<span class="font-label-md text-label-md text-on-surface-variant">Notifications</span>
+<span class="material-symbols-outlined text-[16px] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+<a class="flex items-center justify-between group px-md py-sm hover:bg-surface-container-low rounded transition-colors" href="#data">
+<span class="font-label-md text-label-md text-on-surface-variant">Data Retention</span>
+<span class="material-symbols-outlined text-[16px] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</a>
+</div>
+<!-- Main Configuration Panes -->
+<div class="col-span-9 space-y-xl">
+<!-- Workspace Profile -->
+<section class="bg-surface-container-lowest rounded border border-outline-variant overflow-hidden" id="general">
+<div class="px-lg py-md border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-headline-md text-headline-md text-on-surface">Workspace Profile</h3>
+</div>
+<div class="p-lg space-y-lg">
+<div class="flex items-start gap-xl">
+<div class="w-24 h-24 rounded-xl border border-outline-variant bg-surface-container-low relative group overflow-hidden flex flex-col items-center justify-center cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist workspace logo for a software engineering platform featuring a stylized paper plane or rocket icon in deep navy blue on a crisp white background with sharp edges and premium corporate aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADYOAMKrCOJLj9e69NYYneR4Jwp3OBbeKx1w6pzX1PmWWILOCK9ICki_nMs16Kmw99f_DbRYGoheuqNQpdZ0eM8qfrfjUwy8bNREyZitZKqaeGQMOdsrExKBj57FlFvTMO-38NWih3Lt3G8zq7p8jV5WVCw9e7W7aUfqz1VopnvgDWzAHVmjs9KVhoFJpfNZ5EiCi1m6Lp3zt8ZgM4kAiqDEg649vTfJMdso2djEH-LMvhLdP5YVsiPQWwre1vbPwTiP9Edfg5s68"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white">edit</span>
+</div>
+</div>
+<div class="flex-1 space-y-md">
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Workspace Name</label>
+<input class="w-full h-9 px-md border border-outline-variant rounded font-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="ReleasePilot Engineering"/>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Workspace Slug</label>
+<div class="flex items-center">
+<span class="h-9 px-sm border border-r-0 border-outline-variant rounded-l bg-surface-container-low flex items-center text-on-surface-variant font-label-md">releasepilot.io/</span>
+<input class="flex-1 h-9 px-md border border-outline-variant rounded-r font-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" type="text" value="eng-ops"/>
+</div>
+</div>
+</div>
+<p class="text-label-sm text-on-surface-variant italic">Changing your workspace slug may break existing integration webhooks. Proceed with caution.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Security & SSO -->
+<section class="bg-surface-container-lowest rounded border border-outline-variant overflow-hidden" id="security">
+<div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Security &amp; Authentication</h3>
+<span class="bg-primary-container text-on-primary-fixed text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-widest">Enterprise</span>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- Toggle Item -->
+<div class="p-lg flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Single Sign-On (SAML/OIDC)</p>
+<p class="text-body-sm text-on-surface-variant mt-1">Allow team members to sign in using Okta, Azure AD, or Google Workspace.</p>
+</div>
+<label class="toggle-switch">
+<input checked="" type="checkbox"/>
+<span class="toggle-slider"></span>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="p-lg flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Enforce Multi-Factor Authentication (MFA)</p>
+<p class="text-body-sm text-on-surface-variant mt-1">Require all users to have a secondary verification method active.</p>
+</div>
+<label class="toggle-switch">
+<input checked="" type="checkbox"/>
+<span class="toggle-slider"></span>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="p-lg flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">IP Access Restriction</p>
+<p class="text-body-sm text-on-surface-variant mt-1">Limit workspace access to specific office IP ranges or VPN gateways.</p>
+</div>
+<label class="toggle-switch">
+<input type="checkbox"/>
+<span class="toggle-slider"></span>
+</label>
+</div>
+</div>
+</section>
+<!-- Notifications -->
+<section class="bg-surface-container-lowest rounded border border-outline-variant overflow-hidden" id="notifications">
+<div class="px-lg py-md border-b border-outline-variant bg-surface-container-low">
+<h3 class="font-headline-md text-headline-md text-on-surface">Notification Preferences</h3>
+</div>
+<div class="p-lg space-y-lg">
+<div class="grid grid-cols-2 gap-xl">
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Slack Release Channel</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">tag</span>
+</span>
+<select class="w-full h-9 pl-10 pr-md border border-outline-variant rounded font-body-md focus:ring-1 focus:ring-primary focus:border-primary appearance-none bg-white">
+<option>#eng-releases-prod</option>
+<option>#devops-alerts</option>
+<option>#product-updates</option>
+</select>
+</div>
+<p class="text-[11px] text-on-surface-variant">All deployment start/finish events will be posted here.</p>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Email Digest Frequency</label>
+<div class="flex bg-surface-container-low rounded p-1 border border-outline-variant">
+<button class="flex-1 text-label-sm font-label-sm py-1 rounded transition-colors bg-white shadow-sm border border-outline-variant">Daily</button>
+<button class="flex-1 text-label-sm font-label-sm py-1 rounded transition-colors hover:bg-surface-container-high">Weekly</button>
+<button class="flex-1 text-label-sm font-label-sm py-1 rounded transition-colors hover:bg-surface-container-high">Monthly</button>
+<button class="flex-1 text-label-sm font-label-sm py-1 rounded transition-colors hover:bg-surface-container-high">Never</button>
+</div>
+<p class="text-[11px] text-on-surface-variant">Summary of release success rates and incident reports.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Data Retention -->
+<section class="bg-surface-container-lowest rounded border border-outline-variant overflow-hidden" id="data">
+<div class="px-lg py-md border-b border-outline-variant bg-surface-container-low flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Data Retention &amp; Privacy</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-help" title="Data compliance policy">info</span>
+</div>
+<div class="p-lg">
+<div class="flex items-center justify-between mb-lg">
+<div class="space-y-1">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Audit Log Retention</p>
+<p class="text-body-sm text-on-surface-variant">Define how long security and access logs are stored.</p>
+</div>
+<select class="h-9 px-md border border-outline-variant rounded font-body-md focus:ring-1 focus:ring-primary focus:border-primary bg-white">
+<option>90 Days</option>
+<option>1 Year</option>
+<option selected="">3 Years (Compliance)</option>
+<option>Indefinite</option>
+</select>
+</div>
+<div class="bg-error-container/20 p-md rounded border border-error-container flex gap-md items-start">
+<span class="material-symbols-outlined text-error mt-0.5">warning</span>
+<div>
+<p class="font-label-md text-label-md text-on-error-container font-semibold">Critical Action: Data Sanitization</p>
+<p class="text-body-sm text-on-error-container mt-1">Clearing the release history is permanent and cannot be undone. This will affect all AI Insight trends for the past 12 months.</p>
+<button class="mt-sm text-error font-label-md text-label-md hover:underline">Request historical data wipe...</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Footer -->
+<div class="flex items-center justify-end gap-md pt-lg border-t border-outline-variant">
+<button class="px-lg py-2 rounded text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors">Discard Changes</button>
+<button class="px-lg py-2 rounded bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:opacity-90 transition-all transform active:scale-95">Save Workspace Settings</button>
+</div>
+</div>
+</div>
+<!-- Footer Stats / Meta -->
+<footer class="mt-xl pt-lg border-t border-outline-variant flex justify-between items-center text-label-sm text-on-surface-variant">
+<div class="flex gap-lg">
+<span>Region: <strong>us-east-1</strong></span>
+<span>Plan: <strong>Enterprise Pro</strong></span>
+<span>Next Billing: <strong>Oct 24, 2023</strong></span>
+</div>
+<div class="flex items-center gap-base">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span>All systems operational</span>
+</div>
+</footer>
+</div>
+</main>
+<script>
+        // Simple scroll spy for local navigation active states
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.col-span-3 a');
+
+            window.addEventListener('scroll', () => {
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('bg-surface-container-highest', 'border-l-2', 'border-primary');
+                    link.querySelector('span:first-child').classList.remove('text-on-surface', 'font-semibold');
+                    link.querySelector('span:first-child').classList.add('text-on-surface-variant');
+                    link.querySelector('.material-symbols-outlined').classList.add('opacity-0');
+
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('bg-surface-container-highest', 'border-l-2', 'border-primary');
+                        link.querySelector('span:first-child').classList.add('text-on-surface', 'font-semibold');
+                        link.querySelector('span:first-child').classList.remove('text-on-surface-variant');
+                        link.querySelector('.material-symbols-outlined').classList.remove('opacity-0');
+                    }
+                });
+            });
+        });
+
+        // Toggle micro-interaction
+        document.querySelectorAll('.toggle-switch input').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                const parent = e.target.closest('.hover\\:bg-surface-container-low');
+                if(e.target.checked) {
+                    parent.style.borderLeft = "2px solid #000";
+                } else {
+                    parent.style.borderLeft = "2px solid transparent";
+                }
+            });
+        });
+    </script>
+</body></html>
