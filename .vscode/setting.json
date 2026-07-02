@@ -1,0 +1,13 @@
+{
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "tailwindCSS.experimental.classRegex": [
+        [
+            "className=\"([^\"]*)\"",
+            "([^\"]*)"
+        ]
+    ],
+    "editor.defaultFormatter": "esbenprettier-vscode-prettier",
+    "editor.formatOnSave": true
+}

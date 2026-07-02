@@ -32,6 +32,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} ${geist.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
