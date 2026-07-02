@@ -78,10 +78,10 @@ export default function LandingPage() {
                                 <div className="w-4 h-4 bg-white/10 rounded-sm"></div>
                             </div>
                             <div className="flex items-center justify-center py-8">
-                                <div className="relative w-48 h-48 rounded-full border-[8px] border-white/5 flex items-center justify-center">
-                                    <div className="absolute inset-0 border-[8px] border-[#38bdf8] border-t-transparent border-r-transparent rounded-full rotate-45"></div>
-                                    <div className="absolute inset-0 border-[8px] border-purple-500 border-b-transparent border-l-transparent rounded-full -rotate-45"></div>
-                                    <div className="text-center">
+                                <div className="relative w-48 h-48 rounded-full border-[8px] border-white/5 flex items-center justify-center pulse-glow">
+                                    <div className="absolute -inset-2 border-[8px] border-[#38bdf8] border-t-transparent border-r-transparent rounded-full spin-slow"></div>
+                                    <div className="absolute -inset-2 border-[8px] border-purple-500 border-b-transparent border-l-transparent rounded-full spin-reverse"></div>
+                                    <div className="text-center z-10">
                                         <div className="text-[10px] text-gray-400 font-medium tracking-widest mb-1">READINESS SCORE</div>
                                         <div className="text-5xl font-bold text-white mb-1">92%</div>
                                         <div className="text-xs text-[#38bdf8] font-medium">READY TO SHIP</div>
@@ -457,6 +457,27 @@ export default function LandingPage() {
                 }
                 .animate-\\[marquee_30s_linear_infinite\\] {
                     animation: marquee 30s linear infinite;
+                }
+                @keyframes spin-slow {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes spin-reverse {
+                    from { transform: rotate(360deg); }
+                    to { transform: rotate(0deg); }
+                }
+                .spin-slow {
+                    animation: spin-slow 3s linear infinite;
+                }
+                .spin-reverse {
+                    animation: spin-reverse 4s linear infinite;
+                }
+                .pulse-glow {
+                    animation: pulse-glow 2s ease-in-out infinite alternate;
+                }
+                @keyframes pulse-glow {
+                    from { box-shadow: 0 0 10px rgba(56, 189, 248, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.2); }
+                    to { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.4); }
                 }
             `}</style>
         </div>
