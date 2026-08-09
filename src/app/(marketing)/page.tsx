@@ -22,31 +22,7 @@ export default function LandingPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#0b0c10] text-white font-sans selection:bg-[#5252ff] selection:text-white">
-            
-            {/* Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0b0c10]/80 backdrop-blur-md border-b border-white/10">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-8">
-                        <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight">
-                            <span className="text-[#5252ff]">●</span> Release Intelligence
-                        </Link>
-                        <div className="hidden md:flex items-center gap-6 text-sm text-gray-300">
-                            <Link href="#" className="hover:text-white transition-colors">Features</Link>
-                            <Link href="#" className="hover:text-white transition-colors">Solutions</Link>
-                            <Link href="#" className="hover:text-white transition-colors">Integrations</Link>
-                            <Link href="#" className="hover:text-white transition-colors">Pricing</Link>
-                            <Link href="#" className="hover:text-white transition-colors">Customers</Link>
-                            <Link href="#" className="hover:text-white transition-colors">Resources</Link>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-4 text-sm">
-                        <Link href="#" className="text-gray-300 hover:text-white transition-colors font-medium">Sign In</Link>
-                        <Link href="#" className="bg-[#5252ff] hover:bg-[#4242e5] text-white px-4 py-2 rounded-md font-medium transition-all">Start Free Trial</Link>
-                    </div>
-                </div>
-            </nav>
-
+        <>
             <main className="pt-32">
                 {/* Hero Section */}
                 <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 reveal">
@@ -58,13 +34,13 @@ export default function LandingPage() {
                             Ship <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">Faster.</span><br/>
                             Release <span className="text-[#5252ff]">Smarter.</span>
                         </h1>
-                        <p className="text-gray-400 text-lg mb-8 max-w-lg leading-relaxed">
+                        <p className="text-gray-400 text-md mb-8 w-sm">
                             AI that understands every deployment before production does.
                             Eliminate release anxiety with automated risk analysis and
                             intelligent release notes.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Link href="#" className="bg-[#5252ff] hover:bg-[#4242e5] text-white px-6 py-3 rounded-md font-medium transition-all text-sm">Start Free Trial</Link>
+                            <Link href="/sign-in" className="bg-[#5252ff] hover:bg-[#4242e5] text-white px-6 py-3 rounded-md font-medium transition-all text-sm">Start Free Trial</Link>
                             <Link href="#" className="bg-transparent border border-white/20 hover:border-white/40 text-white px-6 py-3 rounded-md font-medium transition-all text-sm">Book Demo</Link>
                         </div>
                     </div>
@@ -380,75 +356,12 @@ export default function LandingPage() {
                         <h2 className="text-3xl md:text-5xl font-bold mb-6 relative z-10">Every Release Tells a Story.<br/>Understand it before production.</h2>
                         <p className="text-gray-400 mb-10 max-w-2xl mx-auto relative z-10 text-lg">Join 1,000+ engineering teams shipping with absolute confidence and zero anxiety.</p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                            <Link href="#" className="bg-[#a8b1ff] hover:bg-[#c2c9ff] text-[#0b0c10] px-8 py-3.5 rounded-lg font-bold transition-all">Get Started For Free</Link>
+                            <Link href="/sign-in" className="bg-[#a8b1ff] hover:bg-[#c2c9ff] text-[#0b0c10] px-8 py-3.5 rounded-lg font-bold transition-all">Get Started For Free</Link>
                             <Link href="#" className="bg-transparent border border-white/20 hover:border-white/40 text-white px-8 py-3.5 rounded-lg font-bold transition-all">Talk to an Expert</Link>
                         </div>
                     </div>
                 </section>
-
             </main>
-
-            {/* Footer */}
-            <footer className="border-t border-white/10 bg-[#0b0c10] pt-20 pb-10 px-6">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-12 mb-16">
-                    <div className="col-span-2">
-                        <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight mb-4">
-                            <span className="text-[#5252ff]">●</span> Release Intelligence
-                        </Link>
-                        <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
-                            Building the future of software delivery and engineering intelligence.
-                        </p>
-                        <div className="flex gap-4 mt-6">
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors">𝕏</a>
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors">in</a>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 className="font-semibold mb-6">Product</h4>
-                        <ul className="space-y-4 text-sm text-gray-400">
-                            <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-semibold mb-6">Solutions</h4>
-                        <ul className="space-y-4 text-sm text-gray-400">
-                            <li><a href="#" className="hover:text-white transition-colors">Enterprise</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Mobile Teams</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Microservices</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Compliance</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-semibold mb-6">Resources</h4>
-                        <ul className="space-y-4 text-sm text-gray-400">
-                            <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">API Reference</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="font-semibold mb-6">Company</h4>
-                        <ul className="space-y-4 text-sm text-gray-400">
-                            <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-gray-500 gap-4">
-                    <div>© 2024 Release Intelligence. All rights reserved.</div>
-                    <div className="flex gap-6">
-                        <a href="#" className="hover:text-gray-300">Privacy Policy</a>
-                        <a href="#" className="hover:text-gray-300">Terms of Service</a>
-                        <a href="#" className="hover:text-gray-300">Cookie Settings</a>
-                    </div>
-                </div>
-            </footer>
 
             <style jsx global>{`
                 @keyframes marquee {
@@ -480,6 +393,6 @@ export default function LandingPage() {
                     to { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), inset 0 0 20px rgba(168, 85, 247, 0.4); }
                 }
             `}</style>
-        </div>
+        </>
     );
 }
